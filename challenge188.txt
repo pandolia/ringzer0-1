@@ -1,0 +1,6 @@
+File 618d0e51213fa164d93bd92ca5e099c3.txt is a "hex dump"
+
+The hex and clear text are not ISO.
+
+cat 618d0e51213fa164d93bd92ca5e099c3.txt | cut -d' ' -f 17- | tr -d '\n' | sed 's/ //g' | fold 1
+will give the cleartext one char per line

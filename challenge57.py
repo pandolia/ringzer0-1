@@ -30,13 +30,14 @@ for line in f.readlines():
     if 'BEGIN SALT' in line:
         GOTSALT=True
 
+
 #abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 for i in bruteforce('0123456789', 4):
     #print i
-    hash_object = hashlib.sha512(str(i) + SALT)
+    hash_object = hashlib.sha1(str(i) + SALT)
     #print hash_object.hexdigest()
     if hash_object.hexdigest() == HASH:
-        #print "Done"
-        result = opener.open("https://ringzer0team.com/challenges/57/" + hash_object.hexdigest())
+        print "Done {}".format(i)
+        result = opener.open("https://ringzer0team.com/challenges/57/" + i)
         print result.read()
         break

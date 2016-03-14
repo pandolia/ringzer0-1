@@ -3,7 +3,7 @@ import hashlib
 import itertools
 
 opener = urllib2.build_opener()
-opener.addheaders.append(('Cookie', 'PHPSESSID=8ic0a8ih38tqblg4ttrdvmliv2'))
+opener.addheaders.append(('Cookie', 'PHPSESSID=rmh6mq2qu5ej09id02ojorove6'))
 f = opener.open("https://ringzer0team.com/challenges/57")
 GOTHASH=False
 GOTSALT=False
@@ -30,10 +30,13 @@ for line in f.readlines():
     if 'BEGIN SALT' in line:
         GOTSALT=True
 
-
-for i in bruteforce('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6):
+#abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+for i in bruteforce('0123456789', 4):
+    print i
     hash_object = hashlib.sha256(SALT + str(i))
+    print hash_object.hexdigest()
     if hash_object.hexdigest() == HASH:
-        print i
-        result = opener.open("https://ringzer0team.com/challenges/57/" + str(i))
+        print "Done"
+        result = opener.open("https://ringzer0team.com/challenges/57/" + hash_object.hexdigest())
         print result.read()
+        break

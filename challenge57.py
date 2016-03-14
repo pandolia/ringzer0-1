@@ -32,11 +32,11 @@ for line in f.readlines():
 
 #abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 for i in bruteforce('0123456789', 4):
-    print i
-    hash_object = hashlib.sha256(SALT + str(i))
-    print hash_object.hexdigest()
+    #print i
+    hash_object = hashlib.sha512(str(i) + SALT)
+    #print hash_object.hexdigest()
     if hash_object.hexdigest() == HASH:
-        print "Done"
+        #print "Done"
         result = opener.open("https://ringzer0team.com/challenges/57/" + hash_object.hexdigest())
         print result.read()
         break

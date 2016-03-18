@@ -23,3 +23,6 @@ We need to make it ../.pass
 
 Which gives us:
 print shell.cat(shell.help.im_func.func_code.co_consts[3][46:47]+shell.help.im_func.func_code.co_consts[3][46:47]+shell.help.im_func.func_code.co_consts[3][45:46]+shell.help.im_func.func_code.co_consts[3][46:51])
+
+
+ibrbVv6kAEHnR4Shpq8y

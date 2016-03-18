@@ -1,0 +1,4 @@
+morpheus@forensics:~$ ps xfa | grep -i flag
+ 2836 pts/0    S+     0:00              \_ grep -i flag
+ 3033 ?        S      0:19 /bin/sh /root/backup.sh -u trinity -p Flag-08grILsn3ekqhDK7cKBV6ka8B
+

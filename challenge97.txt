@@ -1,0 +1,25 @@
+print dir() shows all available classes
+
+print dir(shell) will get you started
+
+the shell class has four available commands:
+cat  : will be useful later
+help : print out the aim of the challenge
+hint : Give you a link to python documentation
+ls   : same as the linux command
+
+the help command give us the path we need:
+help:
+  This script run as pyjail2.
+  Find a way to print this file /home/pyjail2/.pass
+
+Unfortunatly it's printed from inside a function so we can't assign is to a variable.
+
+We can however find the source of the text here:
+shell.help.im_func.func_code.co_consts
+
+The cat command uses relative paths starting at /home/pyjail2/docs/ so we can't use the path as is.
+We need to make it ../.pass
+
+Which gives us:
+print shell.cat(shell.help.im_func.func_code.co_consts[3][46:47]+shell.help.im_func.func_code.co_consts[3][46:47]+shell.help.im_func.func_code.co_consts[3][45:46]+shell.help.im_func.func_code.co_consts[3][46:51])

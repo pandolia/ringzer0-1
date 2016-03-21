@@ -1,0 +1,9 @@
+The forbidden caracter left two commands available: "eval" and "printf". This means that we could use 
+eval `printf CMD_HERE` and escape the caracters inside the printf. This allowed me to bypass the initial
+filter. To exfiltrate the data, it got a bit tricky since all the output of our command is redirected to
+/dev/null. However we can use /proc/PID_OF_PROMPT_SCRIPT/fd/0 as the output of our command and it will
+send the result to us directly. To get the PID, we can login with level 1 and check it with "ps aux 1>&2".
+Essentially we send the result to the stdout that SSH reads.
+
+This was my final payload and 30370 was the PID of the prompt script.
+eval `printf "\\x62a\\x73h"` -`printf "\\x63"` "`printf "\\x63at * \\x3e \\x2fpro\\x63\\x2f30370\\x2ff\\x64\\x2f0"`"

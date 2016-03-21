@@ -1,0 +1,46 @@
+
+I first I tried launching 'vi' command to get a shell with the well known :
+
+:set shell /bin/bash
+:shell
+
+But it wasn't working.
+
+I knew that vi was launched because of the delay but it seemed to quit automatically.
+
+
+
+I then connected to level1 (because we know that it's on the same lxc container)
+and launched a 'working' shell 
+
+bash 1>&2
+
+
+It seemed that prompt.sh was launching "real.sh" each time I launched a command.
+
+Then I thought it would be interesting trap the EXIT signal with a "vi" command that would let me read/write files.
+
+Hopefully "trap" and "vi" and EXIT wasn't filtered by the script so 
+i entered trap "vi" EXIT and finally got vi running "in blind mode", so on level1 shell, I looked for a read/write place.
+
+/tmp was no more writeable (it was before ^^).
+
+I tried /run/shm => BINGO :-)
+
+In my "blind"-vi I just typed :
+
+:r /home/level4/flag.txt
+:w /run/shm/yeah.txt
+
+and got the result on the level1 shell.
+
+cat /run/shm/yeah.txt
+
+FLAG-OTQKB0274fwtxk3v2rTLCd0l5v7KNp7F
+
+
+source of prompt.sh :
+
+#!/bin/bash
+./real.sh 2>/dev/null
+

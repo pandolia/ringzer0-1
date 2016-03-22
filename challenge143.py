@@ -41,12 +41,16 @@ def solveSudoku(grid, i=0, j=0):
 
 if __name__ == '__main__':
 
-    #s = pxssh.pxssh()
-    #s.login ("ringzer0team.com", "sudoku", "dg43zz6R0E", port="12643")
-    #print s.before
+    s = pxssh.pxssh()
+    s.login("ringzer0team.com", "sudoku", password="dg43zz6R0E", port="12643", original_prompt="Solution:", auto_prompt_reset=False)
+
+    print s.before
+
+    s.prompt()
 
     Grill = [[8,0,0,9,5,0,0,4,6],[0,5,0,0,0,0,0,1,3],[7,0,6,8,0,0,0,0,0],[1,0,0,0,2,0,4,0,8],[5,0,7,4,0,0,1,0,0],[0,0,8,1,3,9,0,0,0],[3,9,0,2,0,0,6,0,1],[2,7,4,6,8,1,0,0,5],[0,8,0,0,9,0,2,7,0]]
     print solveSudoku(Grill)
+    print Grill
     Reply = ""
     for i in Grill:
         for j in i:

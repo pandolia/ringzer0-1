@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 import pxssh
+import string
 
 def findNextCellToFill(grid, i, j):
     for x in range(i,9):
@@ -41,22 +43,31 @@ def solveSudoku(grid, i=0, j=0):
 
 if __name__ == '__main__':
 
-    s = pxssh.pxssh()
-    s.login("ringzer0team.com", "sudoku", password="dg43zz6R0E", port="12643", original_prompt="Solution:", auto_prompt_reset=False)
+    ssh = pxssh.pxssh()
+    ssh.login("ringzer0team.com", username="sudoku", password="dg43zz6R0E", port="12643", auto_prompt_reset=False, original_prompt="Solution:")
 
+
+    output = ssh.before
     sudoku = False
     grille = ""
-    output =  s.before
+    all=string.maketrans('','')
+    nodigs=all.translate(all, string.digits)
 
-    for i in output.split('\n'):
-        if "Solve" in i:
+
+    for patate in output.split('\r\n'):
+        if "Solve" in patate:
             sudoku = False
         if sudoku == True:
-            grille += str(i)
-            #print grille
-        if '+' in i:
+            grille += patate
+        if '+' in patate:
             sudoku = True
-    print "Grille: {}".format(grille)
+    #print "Grille: {}".format(grille)
+    tosolve = grille[82:].replace("   ","0").translate(all, nodigs)
+    inx=0
+    grille2 = [[tosolve for i in range(9)] for j in range(9)]
+
+    print solveSudoku(grille2)
+
 
 """
     Reply = ""

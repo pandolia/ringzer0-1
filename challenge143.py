@@ -43,37 +43,46 @@ def solveSudoku(grid, i=0, j=0):
 
 if __name__ == '__main__':
 
-    ssh = pxssh.pxssh()
-    ssh.login("ringzer0team.com", username="sudoku", password="dg43zz6R0E", port="12643", auto_prompt_reset=False, original_prompt="Solution:")
-
-
-    output = ssh.before
+    trall=string.maketrans('','')
+    nodigs=trall.translate(trall, string.digits)
     sudoku = False
     grille = ""
-    all=string.maketrans('','')
-    nodigs=all.translate(all, string.digits)
 
+    ssh = pxssh.pxssh()
+    ssh.login("ringzer0team.com", username="sudoku", password="dg43zz6R0E", port="12643", auto_prompt_reset=False, original_prompt="Solution:")
+    #ssh.prompt()
+    output = ssh.before
 
-    for patate in output.split('\r\n'):
-        if "Solve" in patate:
+    for output_line in output.split('\r\n'):
+        print output_line
+        if "Solve" in output_line:
             sudoku = False
         if sudoku == True:
-            grille += patate
-        if '+' in patate:
+            grille += output_line
+        if '+' in output_line:
             sudoku = True
-    #print "Grille: {}".format(grille)
-    tosolve = grille[82:].replace("   ","0").translate(all, nodigs)
+    tosolve_withstuff = grille[82:].replace("   ","0")
+    tosolve = tosolve_withstuff.translate(trall, nodigs)
+
     inx=0
-    grille2 = [[tosolve for i in range(9)] for j in range(9)]
+    grille2 = [[0 for x in range(9)] for x in range(9)]
+
+    for a in range(9):
+        for b in range(9):
+            grille2[a][b] = int(tosolve[inx])
+            inx += 1
 
     print solveSudoku(grille2)
 
+    ssh.prompt()
 
-"""
-    Reply = ""
-    for i in Grille:
-        for j in i:
-            Reply += str(j)
+    reply = ""
+    for a in range(9):
+        for b in range(9):
+            reply += str(grille2[a][b])
+            reply += ","
 
-    print Reply
-"""
+    print reply[:-1]
+    ssh.sendline("{}\r\n".format(reply[:-1]))
+    #ssh.prompt()
+    print(ssh.before)

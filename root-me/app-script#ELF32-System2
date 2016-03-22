@@ -1,0 +1,6 @@
+export PATH='/tmp'
+ ./ch12 
+8a95eDS/*e_T#
+
+app-script-ch12@challenge02:~$ ls -al /tmp/ls
+-rwxr-xr-x 1 app-script-ch12 app-script-ch12 44 mars  22 13:51 /tmp/ls

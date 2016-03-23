@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-import pxssh
+import paramiko
 import string
 
 def findNextCellToFill(grid, i, j):
@@ -40,21 +39,29 @@ def solveSudoku(grid, i=0, j=0):
             grid[i][j] = 0
     return False
 
+#def ssh_connect():
+
 
 if __name__ == '__main__':
-
+    buff = ""
     trall=string.maketrans('','')
     nodigs=trall.translate(trall, string.digits)
     sudoku = False
     grille = ""
 
-    ssh = pxssh.pxssh()
-    ssh.login("ringzer0team.com", username="sudoku", password="dg43zz6R0E", port="12643", auto_prompt_reset=False, original_prompt="Solution:")
-    #ssh.prompt()
-    output = ssh.before
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect("ringzer0team.com", username="sudoku", password="dg43zz6R0E", port=12643)
+    ssh_term = ssh.invoke_shell()
 
-    for output_line in output.split('\r\n'):
-        print output_line
+    buff = ''
+    while not buff.endswith(':'):
+        resp = ssh_term.recv(9999)
+        buff += resp
+        #print(resp)
+
+    for output_line in buff:
+        #print output_line
         if "Solve" in output_line:
             sudoku = False
         if sudoku == True:
@@ -63,6 +70,7 @@ if __name__ == '__main__':
             sudoku = True
     tosolve_withstuff = grille[82:].replace("   ","0")
     tosolve = tosolve_withstuff.translate(trall, nodigs)
+    #print tosolve
 
     inx=0
     grille2 = [[0 for x in range(9)] for x in range(9)]
@@ -73,8 +81,7 @@ if __name__ == '__main__':
             inx += 1
 
     print solveSudoku(grille2)
-
-    ssh.prompt()
+    #print grille2
 
     reply = ""
     for a in range(9):
@@ -83,6 +90,9 @@ if __name__ == '__main__':
             reply += ","
 
     print reply[:-1]
-    ssh.sendline("{}\r\n".format(reply[:-1]))
-    #ssh.prompt()
-    print(ssh.before)
+    buff = ''
+    ssh_term.send(reply[:-1] + '\r\n')
+    while not buff.endswith('FLAG'):
+        resp = ssh_term.recv(9999)
+        buff += resp
+        print(resp)

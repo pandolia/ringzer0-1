@@ -1,0 +1,42 @@
+OK, this challenge starts with a zip file containing two encrypted zips and a clear text file.
+One of the zips contains a crypted version of the cleartext file.
+
+Not having much experience I first thought that bruteforcing the encryption by compressing the cleartest with N passwords would be faster than decrypting the flag.
+OK, I'll admit it, I'm not a smart man.... And I now have a python brute force encryption script to prove it.
+I then used google (tm) and discovered zip v2.0 plaintext attacks that work if you have an encrypted zip and a clear text version of at least one of the files, well what do you know....
+
+Turns out I need to find a postcard to send. (see https://www.unix-ag.uni-kl.de/~conrad/krypto/pkcrack/download1.html), and a bit of googling will explain most of the rest but for the lazy...
+
+For pkcrack to work properly it needs three things and four arguments:
+things:
+- encrypted file you want to crack
+- clear text of something encrypted with the same password
+- encrypted version of that clear text
+(Got them, all good...)
+
+Arguments:
+-C encrypted zip name (in this case wierd.zip)
+-c file in encrypted zip (the weird.txt in weird.zip)
+-P encrypted zip that we have a clear text of (wierd.txt found in the file)
+-p file in encrypted zip that we have a cleartext version of (clear.zip)
+
+Wait, what? clear.zip? that's not in the challenge file...
+Nope, you need to make a new zip using weird.txt and "approximately" the same compression (zip v2.0 in this case)(or right click compress and choose zip on debian/ubuntu/mate... at the time of writing)
+
+Once you have all that run:
+./pkcrack-1.2.2/src/pkcrack -C weird.zip -c weird.txt -P clear.zip -p weird.txt
+
+You see things like:
+Strange... had a false hit.
+Ta-daaaaa! key0=3330b3a9, key1=c403beea, key2=a0b3129d
+Probabilistic test succeeded for 77 bytes.
+
+Ignore all that, waith til the end. As I said I'm not a smart man and also have a brute force python script using just 3330b3a9, c403beea, and a0b3129d....
+I could have sat back and had a beer foor twenty minutes and seen:
+Stage 2 completed. Starting password search on Thu Mar 24 22:09:05 2016
+Key: 74 65 73 74 74 65 73 74
+Or as a string: 'testtest' (without the enclosing single quotes)
+
+.......
+
+FLAG-Mk5N1z6PDbcw6alA1G8ixz85

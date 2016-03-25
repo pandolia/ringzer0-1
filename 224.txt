@@ -1,0 +1,3 @@
+//Début de solution ?
+print(glob("*txt")[0]); 
+

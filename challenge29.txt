@@ -31,8 +31,8 @@ Strange... had a false hit.
 Ta-daaaaa! key0=3330b3a9, key1=c403beea, key2=a0b3129d
 Probabilistic test succeeded for 77 bytes.
 
-Ignore all that, waith til the end. As I said I'm not a smart man and also have a brute force python script using just 3330b3a9, c403beea, and a0b3129d....
-I could have sat back and had a beer foor twenty minutes and seen:
+Ignore all that, wait til the end. As I said I'm not a smart man and also have a brute force python script using just 3330b3a9, c403beea, and a0b3129d....
+I could have sat back and had a beer for twenty minutes and seen:
 Stage 2 completed. Starting password search on Thu Mar 24 22:09:05 2016
 Key: 74 65 73 74 74 65 73 74
 Or as a string: 'testtest' (without the enclosing single quotes)

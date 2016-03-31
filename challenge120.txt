@@ -1,0 +1,29 @@
+OK, so we get the source code, and straight off, the random seed is harder to find than the previous password reset.
+The important parts of the code are:
+
+$size = 32;
+$seed = (int)bin2hex(openssl_random_pseudo_bytes($size / 2));
+srand($seed);
+
+for($i = 0; $i < 16; $i++) {
+	$randomDigit = (string)rand() % 10;
+	$token .= "," . $randomDigit;
+}
+$token = str_replace(",", "", $token);
+
+
+So in theory, we need the token,
+To get the token we need randomdigit,
+To get random digit we need a predicted seed,
+To get the seed we need the result of (int)bin2hex(openssl_random_pseudo_bytes($size / 2)),
+That's just (int)bin2hex(openssl_random_pseudo_bytes(16).
+
+Lets run that on it's own a few times...
+
+I see a lot of zeros.....
+
+Lets try srand=0;
+
+It's giving me 3675356291270936.
+
+Oh look, a flag!

@@ -1,0 +1,9 @@
+We are given a zip file, extracting that give us an image of an ext3 partition, this partition contains a todo file that contains the line:
+-restric my my little brother permission to delete file.
+
+As we all know, todo files are where we put the things we never get around to...
+
+$extundelete BK
+Whoa, two "new" files..
+
+one seems to the same odg file that we already had, the other is called secret.sve, and comes in at naught but 4.8TB...

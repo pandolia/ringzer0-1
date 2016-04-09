@@ -1,0 +1,11 @@
+First I stared at the gif for a while, I was tired don't look at me like that..
+
+The I blinked and saw a face in the haze.. huh..
+
+So ImageMagick to the rescue!
+$convert tv.gif -transparent white output.gif
+
+Each frame seems to be random noise, but with the transparent white pixels when you mix two frames you get faces (see challenge156(1-4).png)
+
+Huh, that fourth one has some text:
+FLAG-AcsW3fK9NxJMn2

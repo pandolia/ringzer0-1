@@ -1,0 +1,17 @@
+When I try the form with the username admin I noticed the reply contains:
+
+
+<div class="challenge-wrapper">
+	Welcome to the administration panel<br />
+	<form action="/challenges/104/" method="get">
+		<input type="hidden" class="form-control" value="yesIwantaflag" name="showflagforme" />
+<input type="submit" class="btn btn-success form-control" value="Generate" style="margin-top: 12px" />
+	</form>
+</div>
+
+
+So obviously the next step is:
+
+curl --silent --cookie "PHPSESSID=tdcvo64fvh717skr0vtv62bna0" https://ringzer0team.com/challenges/104?showflagforme=yesIwantaflag | grep FLAG
+
+<div class="alert alert-info">FLAG-Sfi8sZgAK0ddMjVSOQU2rMfUWS</div> Wooo!

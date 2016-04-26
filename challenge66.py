@@ -13,9 +13,7 @@ if __name__ == '__main__':
     data = s.recv(9999)
     pad = ""
     currentpwd = ""
-    values = ""
-    for i in range(33,127):
-        values = values + chr(i)
+    values = map(chr, range(32, 127))
     for i in range(8):
         lowestfloat = 1.0
         lowerletter = ""
@@ -24,7 +22,6 @@ if __name__ == '__main__':
             pad = pad + "0"
         for password in bruteforce(values,1,1):
             s.sendall(currentpwd + password + pad +"\n")
-            print currentpwd + password + pad +"\n"
             data = s.recv(9999)
             try:
                 if float(data.split()[4]) < float(lowestfloat):

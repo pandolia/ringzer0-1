@@ -31,6 +31,4 @@ if __name__ == '__main__':
                 pass
         currentpwd = currentpwd + lowestletter
         print currentpwd
-
     s.close()
-    print currentpwd

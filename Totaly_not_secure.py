@@ -18,9 +18,9 @@ for i in range (76):
     Crypt.getrandbits(32)
 
 key = ''
-while(len(key) <= len(message)):
+while(len(key) < len(message)):
     key += str(Crypt.getrandbits(32))
-print len(key)
-print len(message)
+print key
+
 decoded_message = int(key) ^ int(message)
 print str('%x'%decoded_message).decode('hex')

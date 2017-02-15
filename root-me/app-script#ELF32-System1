@@ -1,5 +1,0 @@
-$ cp /bin/cat /tmp
-$ mv /tmp/cat /tmp/ls
-$ export PATH='/tmp'
-$ ./ch11 
-!oPe96a/.s8d5
